@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bed Status</title>
+    <style>
+        /* ... Your existing CSS ... */
+    </style>
+</head>
+<body>
+<h1>Bed Status</h1>
+<div class="beds-container">
+    <h2>Les Lits</h2>
+    <div class="beds" id="bedsContainer"></div>
+</div>
+<div class="bloc-container">
+    <h2>Bloc Opératoire</h2>
+    <div class="blocs" id="blocContainer"></div>
+</div>
+
+<script>
+    console.log('Script is running...');
+
+    // Function to toggle status and update backend
+    function toggleStatus(type, id, currentStatus) {
+        const newStatus = currentStatus === 'available' ? 'unavailable' : 'available';
+        fetch(`/${type}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: newStatus })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(`Updated ${type} status:`, data);
+                // Here, you might want to update the UI to reflect the change
+            })
+            .catch(error => {
+                console.error(`Error updating ${type} status:`, error);
+            });
+    }
+
+    window.onload = () => {
+        // Fetch bed data and populate HTML
+        fetch('/beds')
+            .then(response => {
+                // ... Your existing code to handle bed data ...
+            })
+            .catch(error => {
+                console.error('Error fetching bed data:', error);
+            });
+
+        // Fetch bloc data and populate HTML
+        fetch('/bloc_operatoire')
+            .then(response => {
+                // ... Your existing code to handle bloc data ...
+            })
+            .catch(error => {
+                console.error('Error fetching Bloc Opératoire data:', error);
+            });
+    };
+</script>
+</body>
+</html>

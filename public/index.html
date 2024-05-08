@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Information Table</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+
+
+</head>
+<body>
+<div class="container">
+
+    <div class="form-container">
+
+
+        <form id="userInfoForm">
+            <label for="natio">National ID:</label>
+            <input type="text" id="natio" name="natio"><br><br>
+
+            <label for="nom">Last Name:</label>
+            <input type="text" id="nom" name="nom"><br><br>
+
+            <label for="prenom">First Name:</label>
+            <input type="text" id="prenom" name="prenom"><br><br>
+
+            <label for="dateOfAdding">Date of Adding:</label>
+            <input type="date" id="dateOfAdding" name="dateOfAdding"><br><br>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age"><br><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone"><br><br>
+
+            <label for="gender">Gender:</label><br>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br><br>
+
+            <label for="condition">Medical/Chirurgical Conditions:</label><br>
+            <select id="condition" name="condition">
+                <option value="medical">Medical</option>
+                <option value="chirurgical">Chirurgical</option>
+            </select><br><br>
+
+            <label for="file">Upload File:</label>
+            <input type="file" id="file" name="file">
+
+            <input type="button" value="Add User" onclick="addUser()">
+                <div class="modifyBtn">
+                    <button >Modify</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="messageBox" class="message-box hidden">
+        <span class="close-btn" onclick="closeMessageBox()">&times;</span>
+        <p id="messageText"></p>
+    </div>
+
+    <!-- Table section -->
+    <div class="table-container">
+        <table id="userTable" border="1">
+            <thead>
+            <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for names...">
+            <tr>
+                <th>Photo</th>
+                <th>National ID</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Date of Adding</th>
+                <th>Age</th>
+                <th>Phone Number</th>
+                <th>Gender</th>
+                <th>Condition</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="userTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+    </script>
+
+</div>
+</div>
+
+
+<div id="detailsPage" class="hidden">
+    <h2>User Details</h2>
+    <div id="detailsContent">
+        <!-- Content will be dynamically added here -->
+    </div>
+    <button onclick="goBack()">Back to Images</button>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>

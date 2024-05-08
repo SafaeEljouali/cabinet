@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Rendez-vous</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Add your CSS file -->
+    <style>
+        /* Reset some default browser styles */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Center the title */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Style for the forms */
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+
+        /* Style for each row in the form */
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        /* Style for labels */
+        label {
+            flex: 1;
+            margin-right: 10px;
+            text-align: right;
+        }
+
+        /* Style for input fields */
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        input[type="submit"] {
+            flex: 2;
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Style for submit buttons */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Style for the tables */
+        table.styled-table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        table.styled-table th,
+        table.styled-table td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        table.styled-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Align tables */
+        table.align-left {
+            float: left;
+            clear: left;
+            margin-right: 20px;
+        }
+
+        table.align-right {
+            float: right;
+            clear: right;
+            margin-left: 20px;
+        }
+
+        /* New styles for containers */
+        .form-container {
+            max-width: 300px;
+            margin-right: 20px; /* Adjust margin as needed */
+        }
+
+        .table-container {
+            width: 80%;
+            margin-left: 20px; /* Adjust margin as needed */
+        }
+
+        .section-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+<div class="section-container">
+    <div class="form-container">
+        <h1>File d'Attente</h1>
+        <form id="fileAttenteForm">
+            <table class="form-table">
+                <tr>
+                    <td><label for="nomFile">Nom:</label></td>
+                    <td><input type="text" id="nomFile" name="nomFile" required></td>
+                </tr>
+                <tr>
+                    <td><label for="dateFile">Date:</label></td>
+                    <td><input type="date" id="dateFile" name="dateFile" required></td>
+                </tr>
+                <tr>
+                    <td><label for="heureFile">Heure:</label></td>
+                    <td><input type="time" id="heureFile" name="heureFile" required></td>
+                </tr>
+            </table>
+            <input type="submit" value="Ajouter à la File d'Attente">
+        </form>
+
+        <h1>Rendez-vous Futurs</h1>
+        <form id="rdvFutursForm">
+            <table class="form-table">
+                <tr>
+                    <td><label for="nomRdvFuturs">Nom:</label></td>
+                    <td><input type="text" id="nomRdvFuturs" name="nomRdvFuturs" required></td>
+                </tr>
+                <tr>
+                    <td><label for="dateRdvFuturs">Date:</label></td>
+                    <td><input type="date" id="dateRdvFuturs" name="dateRdvFuturs" required></td>
+                </tr>
+                <tr>
+                    <td><label for="heureRdvFuturs">Heure:</label></td>
+                    <td><input type="time" id="heureRdvFuturs" name="heureRdvFuturs" required></td>
+                </tr>
+            </table>
+            <input type="submit" value="Fixer un Rendez-vous Futur">
+        </form>
+    </div>
+
+    <div class="table-container">
+        <h1>File d'Attente Liste</h1>
+        <table id="rdvAujourdhui" class="styled-table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>Heure</th>
+            </tr>
+            </thead>
+            <tbody id="tableFileAttente">
+            </tbody>
+        </table>
+
+
+
+        <h1>Rendez-vous Futurs Liste</h1>
+        <table id="tableRdvFuturs" class="styled-table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>Heure</th>
+
+            </tr>
+            </thead>
+            <tbody id="tableRendezVousFuturs">
+            <!-- Tableau pour afficher les rendez-vous futurs -->
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+</div>
+
+<script>
+
+</script>
+
+<script src="rendezvous.js"></script>
+</body>
+</html>

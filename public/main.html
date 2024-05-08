@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Styled Buttons and Table</title>
+    <style>
+        /* Styles communs à plusieurs éléments */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            -webkit-font-smoothing: antialiased; /* Rendu lissé des polices pour les navigateurs WebKit */
+            font-smoothing: antialiased; /* Rendu lissé des polices pour les autres navigateurs */
+            color: #3b3b3b;
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 400;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px; /* Espacement en bas de 20px */
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between; /* Espacement égal entre les éléments de la container */
+            width: 80%; /* Largeur fixée à 80% */
+            margin-bottom: 20px; /* Espacement en bas de 20px */
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Les boutons sont alignés verticalement */
+            align-items: flex-start; /* Alignement à gauche */
+            width: 20%; /* Largeur fixée à 20% */
+        }
+
+        /* Styles pour les tables */
+        table {
+            border-collapse: collapse; /* Fusion des bordures des cellules de la table */
+            width: 80%; /* Largeur fixée à 80% */
+        }
+
+        th, td {
+            padding: 8px; /* Remplissage intérieur de 8px */
+            text-align: center; /* Alignement centré */
+            border: 1px solid #ddd; /* Bordure de 1px avec couleur grise */
+        }
+
+        th {
+            background-color: #f2f2f2; /* Couleur de fond pour les cellules d'en-tête */
+        }
+
+        /* Styles pour les boutons */
+        button {
+            padding: 12px 21px; /* Remplissage intérieur de 12px en hauteur, 24px en largeur */
+            font-size: 16px; /* Taille de police de 16px */
+            cursor: pointer; /* Curseur de souris pointer */
+            background-color: #3498db; /* Couleur de fond bleue */
+            color: white; /* Texte en blanc */
+            border: none; /* Pas de bordure */
+            border-radius: 6px; /* Coins arrondis de 6px */
+            margin: 10px 0; /* Marge de 10px en haut et en bas */
+            transition: background-color 0.3s ease; /* Animation de transition au survol */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+            outline: none; /* Pas de contour */
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Couleur de fond bleue plus foncée au survol */
+        }
+
+        /* Styles spécifiques à une table */
+        .styled-table {
+            border-collapse: collapse; /* Fusion des bordures des cellules de la table */
+            width: 80%; /* Largeur fixée à 80% */
+            margin: 0 auto; /* Centrage horizontal */
+        }
+
+        .styled-table th,
+        .styled-table td {
+            border: 1px solid #dddddd; /* Bordure de 1px avec couleur grise */
+            text-align: left; /* Alignement du texte à gauche */
+            padding: 8px; /* Remplissage intérieur de 8px */
+        }
+
+        .styled-table th {
+            background-color: #ae67d7; /* Couleur de fond pour les cellules d'en-tête */
+        }
+
+        /* Responsive - petite taille d'écran */
+        @media screen and (max-width: 580px) {
+            body {
+                font-size: 16px; /* Taille de police plus grande pour les petits écrans */
+                line-height: 22px; /* Hauteur de ligne plus grande pour les petits écrans */
+            }
+
+            .container {
+                flex-direction: column; /* Les éléments de la container s'affichent en colonne */
+                align-items: center; /* Alignement au centre pour les petits écrans */
+            }
+
+            .button-container,
+            table {
+                width: 80%; /* Largeur de 100% pour occuper toute la largeur */
+                margin: 0; /* Pas de marge */
+            }
+
+            .button-container button {
+                margin-bottom: 19px; /* Espacement des boutons en bas */
+            }
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="button-container">
+        <button onclick="goToIndex()">Nouveau Patient </button>
+        <button onclick="goToFold()">Dossiers Medical et Chirurgical</button>
+        <button onclick="goTordv()">Rendez Vous</button>
+        <button onclick="gotolit()()">Lit et Bloc operatoire</button>
+
+        <button onclick="goToCompta()">Comptabilite</button>
+        <button onclick="goTocld()">Calendrier</button>
+    </div>
+
+
+    <div id="tableRdvAujourdhui" class="styled-table">
+        <h1>Rendez-vous Aujourd'hui</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>Heure</th>
+            </tr>
+            </thead>
+            <tbody id="tableRendezVousAujourdhui">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadRendezVous();
+    });
+</script>
+
+<script src="/rendezvous.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>

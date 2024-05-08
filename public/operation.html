@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Informations Médicales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .center-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form input[type="time"],
+        form input[type="number"],
+        form select,
+        form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button[type="submit"], form button[type="button"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form button[type="submit"]:hover, form button[type="button"]:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        table tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="center-container">
+    <!-- Consultation Table -->
+    <h2>Informations des Opérations</h2>
+    <table id="operation">
+        <thead>
+        <tr>
+            <th>Num_Operation</th>
+            <th>Type_Operation</th>
+            <th>Dateo</th>
+            <th>Heure</th>
+            <th>Salle</th>
+            <th>Anesthesie</th>
+            <th>Instruments</th>
+            <th>Nbr_infirmiers</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="operationTableBody">
+        <!-- Les informations de l'opération seront affichées ici -->
+        </tbody>
+    </table>
+
+    <h2>Formulaire d'Opération</h2>
+    <form id="operationForm">
+        <label for="Num_Operation">Num_Operation:</label>
+        <input type="text" name="Symptome" id="Num_Operation" style="width:100px"/>
+        <label for="Type_Operation">NType_Operation:</label>
+        <select id="Type_Operation" name="Type_Operation" required>
+            <option value="Chirurgie cardiaque">Chirurgie cardiaque</option>
+            <option value="Chirurgie orthopédique">Chirurgie orthopédique</option>
+            <option value="Chirurgie abdominale">Chirurgie abdominale</option>
+            <!-- Ajoutez d'autres types d'opérations au besoin -->
+        </select><br>
+
+        <label for="Dateo">Dateo:</label>
+        <input type="date" id="Dateo" name="Date " value="2018-07-22" min="2011-01-01" max="2018-12-31" style="width:100px"/>
+        <label for="Heure">Heure:</label>
+        <input type="text" name="Symptome" id="Heure" style="width:100px"/>
+        <label for="Salle">salle:</label>
+        <input type="text" name="Hypertension_Arterielle" id="Salle" style="width:100px"/>
+        <label for="Anesthesie">Anesthesie:</label>
+        <select id="Anesthesie" name="Anesthesie" required>
+            <option value="Générale">Générale</option>
+            <option value="Locale">Locale</option>
+            <option value="Régionale">Régionale</option>
+            <!-- Ajoutez d'autres types d'anesthésie au besoin -->
+        </select><br>
+
+        <label for="Instruments">Instruments:</label>
+        <select id="Instruments" name="Instruments" multiple required>
+            <option value="Scalpel">Scalpel</option>
+            <option value="Pince">Pince</option>
+            <option value="Ciseaux">Ciseaux</option>
+            <!-- Ajoutez d'autres instruments au besoin -->
+        </select><br>
+        <label for="Nbr_infirmiers">Nbr infermiers:</label>
+        <input type="text" name="Symptome" id="Nbr_infirmiers" style="width:100px"/>
+
+        <button type="button" onclick="ajouterOperation()">Ajouter Consultation</button>
+    </form>
+
+    <div id="rightSection">
+        <table id="NumC">
+            <thead>
+            <tr>
+
+                <th>N_Consul</th>
+                <th>Date</th>
+                <th>Symptome</th>
+                <th>Hytention_Art</th>
+                <th>Diabete</th>
+                <th>Remarque</th>
+                <th>Actions</th>
+            <tr>
+
+
+            </thead>
+            <tbody   id="consultt">
+
+            </tbody>
+        </table>
+        <h2>Ajouter Consultation</h2>
+        <form id="NumConsultation">
+            <label for="Num_Consultation">Nm Consul :</label>
+            <input type="text" name="Symptome" id="Num_Consultation" style="width:100px"/>
+            <label for="Date">Date :</label>
+            <input type="date" id="Date" name="Date " />
+            <label for="Symptome">Symptome :</label>
+            <input type="text" name="Symptome" id="Symptome" style="width:100px"/>
+            <label for="Hypertension_Arterielle">Hypertension_Arterielle :</label>
+            <input type="text" name="Hypertension_Arterielle" id="Hypertension_Arterielle" style="width:100px"/>
+            <label for="Diabete">Diabete:</label>
+            <input type="text" name="Diabete" id="Diabete" />
+            <label for="Remarque">Remarque:</label>
+            <input type="text" name="Remarque" id="Remarque" />
+
+
+            <button type="button" onclick="ajouterConsultation()">Ajouter Consultation</button>
+        </form>
+
+        <!-- Graphe Section -->
+        <div id="grapheSection">
+            <h2>graphes</h2>
+            <table id="NbrGraphe">
+                <thead>
+                <tr>
+
+                    <th>Nbr_Graphe</th>
+                    <th>Date_Graph</th>
+                    <th>PhotoGraphe</th>
+                    <th>Actions</th>
+
+                </tr>
+                </thead>
+                <tbody   id="Graphh">
+
+                </tbody>
+            </table>
+            <h2>Ajouter Graphe</h2>
+            <form id="oi2">
+                <label for="Nbr_Graphe">Nbr Graphe:</label>
+                <input type="text" name="Nombre Graphe" id="Nbr_Graphe" />
+                <label for="Date_Graph">Date:</label>
+                <input type="date" id="Date_Graph" name="Date_Graph" />
+                <label for="PhotoGraphe">Photographe:</label>
+                <input type="file" id="PhotoGraphe" name="PhotoGraphe" accept="image/*"> <!-- Accept only image files -->
+                <button type="button" onclick="ajouterGraphe()">Ajouter Graphe</button>
+            </form>
+
+        </div>
+
+        <!-- Analyse Section -->
+        <div id="analyseSection">
+            <h2>analyses</h2>
+            <table id="analysesTable">
+                <thead>
+                <tr>
+                    <th>Nbre_Analyse</th>
+                    <th>Date_Analyse</th>
+                    <th>Photo_Analyse</th>
+                    <th>Actions</th>
+
+                </tr>
+                </thead>
+                <tbody   id="analyss">
+
+                </tbody>
+            </table>
+            <h2>Ajouter Analyse</h2>
+            <form id="analysesForm">
+                <form id="oi">
+                    <label for="Nbr">NombreAnalyse:</label>
+                    <input type="text" name="Nombre Analyse" id="Nbr" />
+                    <label for="Dateanalyse">Date:</label>
+                    <input type="date" id="Dateanalyse" name="Date Graphe" />
+                    <input type="file" id="Photo_analyse" name="Photo Analyse">
+                    <button type="button" onclick="ajouterAnalyse()">Ajouter Analyse</button>
+                </form>
+            </form>
+            <div>
+
+
+
+            </div>
+
+        </div>
+
+<script src="script1.js"></script>
+<script src="script123.js"></script>
+
+</body>
+
+</html>

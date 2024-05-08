@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Personnes et Prix</title>
+    <style>
+
+        .container {
+            width: 30%; /* Adjust the width as needed */
+            margin-right: 70%; /* For table and button to appear on the left */
+            overflow: auto; /* Adding clearfix */
+        }
+
+        table {
+            width: 70%; /* Utilize the entire width */
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        button {
+            display: block;
+            margin-top: 20px; /* Adjust the space between table and button */
+            padding: 12px 24px; /* Slightly larger padding for a modern look */
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #150909;
+            color: white;
+            border: none;
+            border-radius: 6px; /* Rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition */
+        }
+
+        button:hover {
+            background-color: #5d3939; /* Darker shade on hover */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #000000; /* Matching color with the button */
+        }
+
+        table th,
+        table td {
+            padding: 8px; /* Slightly increased padding for better readability */
+            border: 1px solid #b79b98;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #be9cd3;
+            color: white; /* Contrast text color */
+        }
+
+
+    </style>
+</head>
+<body>
+<h1>Liste des Personnes et Prix</h1>
+<table id="personnesTable">
+    <thead>
+    <tr>
+        <th>National ID</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Prix</th>
+    </tr>
+    </thead>
+    <tbody id="personnesTableBody">
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="3"><strong>Total :</strong></td>
+        <td><span id="totalPrix">0.00</span></td>
+    </tr>
+    </tfoot>
+</table>
+
+<button onclick="enregistrerPrix()">Enregistrer les Prix</button>
+
+
+<script src="comptabilite.js"></script>
+
+</body>
+</html>

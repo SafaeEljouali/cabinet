@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bed Status</title>
+    <style>
+        .beds-container,
+        .bloc-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .beds,
+        .blocs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .bed,
+        .bloc {
+            position: relative;
+            width: calc(20% - 20px); /* 20% width for each bed with margin included */
+            margin: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .bed img,
+        .bloc img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .number {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Bed Status</h1>
+<div class="beds-container">
+    <h2>Les Lits</h2>
+    <div class="beds" id="bedsContainer"></div>
+</div>
+<div class="bloc-container">
+    <h2>Bloc Opératoire</h2>
+    <div class="blocs" id="blocContainer"></div>
+</div>
+<script>
+    console.log('Script is running...');
+
+
+    function reloadPage() {
+        location.reload();
+    }
+
+    function fetchBeds() {
+        fetch('/beds')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const bedsContainer = document.getElementById('bedsContainer');
+                data.slice(0, 10).forEach((bed, index) => {
+                    const bedDiv = document.createElement('div');
+                    bedDiv.classList.add('bed');
+                    const bedImage = document.createElement('img');
+                    bedImage.src = 'https://medtegrity.us/wp-content/uploads/2018/05/hospital-bed-linen-service-1000x430.jpg';
+                    bedImage.alt = `Bed ${bed.bed_number}`;
+                    bedDiv.appendChild(bedImage);
+
+                    const bedNumber = document.createElement('div');
+                    bedNumber.classList.add('number');
+                    bedNumber.textContent = index + 1; // Start numbering from 1
+                    bedDiv.appendChild(bedNumber);
+
+                    if (bed.status === 'available') {
+                        bedDiv.style.backgroundColor = 'green';
+                    } else if (bed.status === 'unavailable') {
+                        bedDiv.style.backgroundColor = 'red';
+                    }
+
+                    bedDiv.addEventListener('click', () => {
+                        toggleStatus('beds', bed.id, bed.status);
+                        reloadPage();
+                    });
+
+
+                    bedsContainer.appendChild(bedDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching bed data:', error);
+            });
+    }
+
+    function fetchOperatingBlocks() {
+        fetch('/bloc_operatoire')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const blocContainer = document.getElementById('blocContainer');
+                data.slice(0, 5).forEach((bloc, index) => {
+                    const statusDiv = document.createElement('div');
+                    statusDiv.classList.add('bloc');
+                    const statusImage = document.createElement('img');
+                    statusImage.src = 'https://www.larousse.fr/encyclopedie/data/images/1007090-Bloc_op%C3%A9ratoire.jpg';
+                    statusImage.alt = `Bloc ${bloc.id}`;
+                    statusDiv.appendChild(statusImage);
+
+                    const statusNumber = document.createElement('div');
+                    statusNumber.classList.add('number');
+                    statusNumber.textContent = index + 1; // Start numbering from 1
+                    statusDiv.appendChild(statusNumber);
+
+                    if (bloc.status === 'available') {
+                        statusDiv.style.backgroundColor = 'green';
+                    } else if (bloc.status === 'unavailable') {
+                        statusDiv.style.backgroundColor = 'red';
+                    }
+
+                    statusDiv.addEventListener('click', () =>{
+                        toggleStatus('bloc_operatoire', bloc.id, bloc.status);
+                        reloadPage();
+                    });
+
+
+                    blocContainer.appendChild(statusDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching Bloc Opératoire status:', error);
+            });
+    }
+
+    function toggleStatus(type, id, currentStatus) {
+        const newStatus = currentStatus === 'available' ? 'unavailable' : 'available';
+        fetch(`/${type}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: newStatus })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(`Updated ${type} status:`, data);
+                const element = document.getElementById(`${type}-${id}`);
+                if (newStatus === 'available') {
+                    element.style.backgroundColor = 'green';
+                } else if (newStatus === 'unavailable') {
+                    element.style.backgroundColor = 'red';
+                }
+            })
+            .catch(error => {
+                console.error(`Error updating ${type} status:`, error);
+            });
+    }
+
+    window.onload = () => {
+        fetchBeds();
+        fetchOperatingBlocks();
+    };
+</script>
+</body>
+</html>

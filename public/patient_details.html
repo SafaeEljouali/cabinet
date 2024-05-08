@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page d'Informations Médicales</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: auto;
+      background-color: #f5f5f5;
+    }
+
+    #leftSection,
+    #rightSection {
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    #patientInfo {
+      border: 2px solid #3498db;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #patientInfo img {
+      max-width: 100%;
+      max-height: 150px;
+      margin-bottom: 10px;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+    }
+
+    table {
+      table-layout: fixed;
+      width: 100%;
+      border-collapse: collapse;
+      border: 3px solid purple;
+      margin-top: 10px;
+    }
+
+    th,
+    td {
+      padding: 12px;
+    }
+
+    select,
+    input {
+      width: calc(100% - 16px);
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 12px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #297fb8;
+    }
+
+    #rightSection {
+      display: grid;
+      grid-template-rows: auto;
+      grid-row-gap: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    form input,
+    form button {
+      margin-bottom: 10px;
+    }
+
+    /* Ajout de styles pour les sections droites */
+    #grapheSection,
+    #analyseSection {
+      border: 2px solid #3498db;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: white;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 10px;
+      word-wrap: break-word;
+      white-space: pre-line;
+    }
+
+    th:nth-child(7),
+    td:nth-child(7) {
+      width: 30%;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .deleteButton {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .deleteButton:hover {
+      background-color: #c82333;
+    }
+
+    .carre {
+      width: 100px;
+      height: 100px;
+      background-color: #3498db;
+    }
+  </style>
+</head>
+
+<body style="display: flex;">
+
+<div id="leftSection">
+  <div id="personDetails"></div>
+
+
+
+
+<div id="rightSection">
+  <table id="NumC">
+    <thead>
+    <tr>
+
+      <th>N_Consul</th>
+      <th>Date</th>
+      <th>Symptome</th>
+      <th>Hytention_Art</th>
+      <th>Diabete</th>
+      <th>Remarque</th>
+      <th>Actions</th>
+    <tr>
+
+
+    </thead>
+    <tbody   id="consultt">
+
+    </tbody>
+  </table>
+  <h2>Ajouter Consultation</h2>
+  <form id="NumConsultation">
+    <label for="Num_Consultation">Nm Consul :</label>
+    <input type="text" name="Symptome" id="Num_Consultation" style="width:100px"/>
+    <label for="Date">Date :</label>
+    <input type="date" id="Date" name="Date " />
+    <label for="Symptome">Symptome :</label>
+    <input type="text" name="Symptome" id="Symptome" style="width:100px"/>
+    <label for="Hypertension_Arterielle">Hypertension_Arterielle :</label>
+    <input type="text" name="Hypertension_Arterielle" id="Hypertension_Arterielle" style="width:100px"/>
+    <label for="Diabete">Diabete:</label>
+    <input type="text" name="Diabete" id="Diabete" />
+    <label for="Remarque">Remarque:</label>
+    <input type="text" name="Remarque" id="Remarque" />
+
+
+    <button type="button" onclick="ajouterConsultation()">Ajouter Consultation</button>
+  </form>
+
+  <!-- Graphe Section -->
+  <div id="grapheSection">
+    <h2>graphes</h2>
+    <table id="NbrGraphe">
+      <thead>
+      <tr>
+
+        <th>Nbr_Graphe</th>
+        <th>Date_Graph</th>
+        <th>PhotoGraphe</th>
+        <th>Actions</th>
+
+      </tr>
+      </thead>
+      <tbody   id="Graphh">
+
+      </tbody>
+    </table>
+    <h2>Ajouter Graphe</h2>
+    <form id="oi2">
+      <label for="Nbr_Graphe">Nbr Graphe:</label>
+      <input type="text" name="Nombre Graphe" id="Nbr_Graphe" />
+      <label for="Date_Graph">Date:</label>
+      <input type="date" id="Date_Graph" name="Date_Graph" />
+      <label for="PhotoGraphe">Photographe:</label>
+      <input type="file" id="PhotoGraphe" name="PhotoGraphe" accept="image/*"> <!-- Accept only image files -->
+      <button type="button" onclick="ajouterGraphe()">Ajouter Graphe</button>
+    </form>
+
+  </div>
+
+  <!-- Analyse Section -->
+  <div id="analyseSection">
+    <h2>analyses</h2>
+    <table id="analysesTable">
+      <thead>
+      <tr>
+        <th>Nbre_Analyse</th>
+        <th>Date_Analyse</th>
+        <th>Photo_Analyse</th>
+        <th>Actions</th>
+
+      </tr>
+      </thead>
+      <tbody   id="analyss">
+
+      </tbody>
+    </table>
+    <h2>Ajouter Analyse</h2>
+    <form id="analysesForm">
+      <form id="oi">
+        <label for="Nbr">NombreAnalyse:</label>
+        <input type="text" name="Nombre Analyse" id="Nbr" />
+        <label for="Dateanalyse">Date:</label>
+        <input type="date" id="Dateanalyse" name="Date Graphe" />
+        <input type="file" id="Photo_analyse" name="Photo Analyse">
+        <button type="button" onclick="ajouterAnalyse()">Ajouter Analyse</button>
+      </form>
+    </form>
+    <div>
+
+
+
+    </div>
+
+  </div>
+  <script>
+    function fetchPersonDetails() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const nationalId = urlParams.get('nationalId');
+
+      if (!nationalId) {
+        console.error('No national ID received');
+        return;
+      }
+
+      fetch(`/getUserDetails/${nationalId}`)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('Error fetching person details');
+                }
+                return response.json();
+              })
+              .then(personInfo => {
+                const personDetails = document.getElementById('personDetails');
+                // Display the person information
+                const { national_id, first_name, last_name, age,gender, phone_number } = personInfo;
+                personDetails.innerHTML = `
+                    <h2>Person Details</h2>
+                    <p>National ID: ${national_id}</p>
+                    <p>First Name: ${first_name}</p>
+                    <p>Last Name: ${last_name}</p>
+                    <p>Age: ${age}</p>
+                    <p>Phone Number: ${phone_number}</p>
+                    <p>Sexe: ${gender}</p>
+                `;
+              })
+              .catch(error => {
+                console.error('Error fetching person details:', error);
+                const personDetails = document.getElementById('personDetails');
+                personDetails.innerHTML = 'Error fetching person details';
+              });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      fetchPersonDetails();
+    });
+
+  </script>
+  <script src="script1.js"></script>
+
+</div>
+</body>
+
+</html>
